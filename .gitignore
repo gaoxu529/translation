@@ -1,0 +1,15 @@
+/vendor/
+/node_modules/
+
+# Laravel 5 & up specific
+/bootstrap/cache/
+/storage/*.key
+.env
+.env.backup
+.phpunit.result.cache
+
+#Mac OS x specific
+.DS_Store
+
+# Windows specific
+Thumb.db
