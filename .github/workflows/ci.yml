@@ -28,12 +28,12 @@ jobs:
         run: composer install --prefer-dist --no-progress --no-suggest
 
       # 如果你的扩展包需要测试数据库等 Laravel 功能
-      - name: Set up Laravel
-        run: |
-          composer require --dev orchestra/testbench
-          cp -v ./vendor/orchestra/testbench-core/laravel/* ./
-          cp ./vendor/orchestra/testbench-core/laravel/.env.testing .env
-          php artisan key:generate
+#      - name: Set up Laravel
+#        run: |
+#          composer require --dev orchestra/testbench
+#          cp -v ./vendor/orchestra/testbench-core/laravel/* ./
+#          cp ./vendor/orchestra/testbench-core/laravel/.env.testing .env
+#          php artisan key:generate
 
       - name: Run tests
         run: vendor/bin/phpunit
