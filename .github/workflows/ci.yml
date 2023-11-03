@@ -1,0 +1,39 @@
+name: Run Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0' # 选择你希望测试的 PHP 版本
+          extensions: mbstring, dom, fileinfo, mysql # 添加扩展包可能需要的 PHP 扩展
+          tools: composer:v2
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      # 如果你的扩展包需要测试数据库等 Laravel 功能
+      - name: Set up Laravel
+        run: |
+          composer require --dev orchestra/testbench
+          cp -v ./vendor/orchestra/testbench-core/laravel/* ./
+          cp ./vendor/orchestra/testbench-core/laravel/.env.testing .env
+          php artisan key:generate
+
+      - name: Run tests
+        run: vendor/bin/phpunit

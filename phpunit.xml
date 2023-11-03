@@ -1,0 +1,17 @@
+<phpunit bootstrap="vendor/autoload.php"
+         colors="true"
+         verbose="true">
+    <php>
+        <env name="APP_EVN" value="test"/>
+    </php>
+    <testsuites>
+        <testsuite name="Your Package Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src/</directory>
+        </whitelist>
+    </filter>
+</phpunit>

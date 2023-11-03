@@ -7,7 +7,7 @@ namespace risingsun\Translation\Aliyun;
 use AlibabaCloud\Client\AlibabaCloud;
 use AlibabaCloud\Client\Exception\ClientException;
 use AlibabaCloud\Client\Exception\ServerException;
-use Log;
+use Illuminate\Support\Facades\Log;
 use risingsun\Translation\TranslationService;
 use RuntimeException;
 

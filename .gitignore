@@ -1,6 +1,8 @@
 /vendor/
 /node_modules/
 composer.lock
+.env*
+.idea
 
 # Laravel 5 & up specific
 /bootstrap/cache/

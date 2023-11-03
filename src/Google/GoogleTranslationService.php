@@ -56,4 +56,9 @@ class GoogleTranslationService extends TranslationService
         return $this->errorMessage;
     }
 
+    function translationHtml(string $originLanguage, string $targetLanguage, string $sourceText): string
+    {
+        // TODO: Implement translationHtml() method.
+        return '';
+    }
 }
