@@ -12,7 +12,7 @@ class AliyunTranslationServiceTest extends TestCase
         $translationDriver = env('TRANSLATION_DRIVER', 'aliyun');
         $accessKeyId = env('ALIYUN_TRANSLATION_ACCESS_KEY_ID', 'LTAI5tAXE78JD6aLLzDDdfpT');
         $accessSecret = env('ALIYUN_TRANSLATION_ACCESS_KEY_SECRET', 'OMWRc8BLIJRZV6lRcKd4OgKKJBhKDY');
-        $regionId = env('ALIYUN_TRANSLATION_REGION_ID', 'cn-hongkong');
+        $regionId = env('ALIYUN_TRANSLATION_REGION_ID', 'cn-hangzhou');
 
         Config::set("Translation.default", $translationDriver);
         Config::set('Translation.channels.aliyun.accessKeyId', $accessKeyId);
