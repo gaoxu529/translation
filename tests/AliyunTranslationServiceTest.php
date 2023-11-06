@@ -8,6 +8,7 @@ class AliyunTranslationServiceTest extends TestCase
 {
     protected function getEnvironmentSetUp($app)
     {
+        echo "AliyunTranslationServiceTest getEnvironmentSetUp\n";
         $translationDriver = env('TRANSLATION_DRIVER', 'aliyun');
         $accessKeyId = env('ALIYUN_TRANSLATION_ACCESS_KEY_ID', '');
         $accessSecret = env('ALIYUN_TRANSLATION_ACCESS_KEY_SECRET', '');
@@ -21,6 +22,7 @@ class AliyunTranslationServiceTest extends TestCase
 
     public function testServiceCanBeResolvedFromContainer()
     {
+        echo "AliyunTranslationServiceTest testServiceCanBeResolvedFromContainer\n";
         if (!empty($this)) {
             $service = $this->app->make(TranslationService::class);
         }
