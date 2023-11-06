@@ -22,7 +22,6 @@ class AliyunTranslationServiceTest extends TestCase
 
     public function testServiceCanBeResolvedFromContainer()
     {
-        exec('php -v');
         if (!empty($this)) {
             $service = $this->app->make(TranslationService::class);
         }
