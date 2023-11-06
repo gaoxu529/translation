@@ -2,6 +2,7 @@
 
 namespace risingsun\Translation\Tests;
 
+use Illuminate\Support\Facades\Config;
 use risingsun\Translation\TranslationService;
 
 class AliyunTranslationServiceTest extends TestCase
@@ -20,14 +21,20 @@ class AliyunTranslationServiceTest extends TestCase
         $accessSecret = env('ALIYUN_TRANSLATION_ACCESS_KEY_SECRET', '');
         $regionId = env('ALIYUN_TRANSLATION_REGION_ID', 'cn-hongkong');
 
-        $app['config']->set('Translation.default', $translationDriver);
-        $app['config']->set('Translation.channels.aliyun.accessKeyId', $accessKeyId);
-        $app['config']->set('Translation.channels.aliyun.accessSecret', $accessSecret);
-        $app['config']->set('Translation.channels.aliyun.regionId', $regionId);
+        echo "translationDriver: $translationDriver\n";
+        echo "accessKeyId: $accessKeyId\n";
+        echo "accessSecret: $accessSecret\n";
+        echo "regionId: $regionId\n";
+
+        Config::set("Translation.default",$translationDriver);
+        Config::set('Translation.channels.aliyun.accessKeyId', $accessKeyId);
+        Config::set('Translation.channels.aliyun.accessSecret', $accessSecret);
+        Config::set('Translation.channels.aliyun.regionId', $regionId);
     }
 
     public function testServiceCanBeResolvedFromContainer()
     {
+        $this->getEnvironmentSetUp($this->app);
         echo "AliyunTranslationServiceTest testServiceCanBeResolvedFromContainer\n";
         if (!empty($this)) {
             $service = $this->app->make(TranslationService::class);
