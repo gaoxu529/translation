@@ -67,12 +67,12 @@ class AliyunTranslationService extends TranslationService
             if ($result->isSuccess() && isset($result->DetectedLanguage)) {
                 return $result->DetectedLanguage;
             } else {
-                return "";
+                return "6666";
             }
         } catch (ClientException | ServerException $e) {
             $this->errorMessage = $e->getErrorMessage();
             Log::error($e->getErrorMessage(), $e->getTrace());
-            return "";
+            return "$this->errorMessage";
         }
     }
 
@@ -110,12 +110,12 @@ class AliyunTranslationService extends TranslationService
             if ($result->isSuccess() && isset($result->Data) && isset($result->Data->Translated)) {
                 return $result->Data->Translated;
             } else {
-                return "";
+                return "777";
             }
         } catch (ClientException | ServerException $e) {
             $this->errorMessage = $e->getErrorMessage();
             Log::error($e->getErrorMessage(), $e->getTrace());
-            return "";
+            return "$this->errorMessage";
         }
     }
 
