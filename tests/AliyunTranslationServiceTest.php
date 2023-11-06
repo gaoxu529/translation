@@ -16,10 +16,11 @@ class AliyunTranslationServiceTest extends TestCase
     protected function getEnvironmentSetUp($app)
     {
         echo "AliyunTranslationServiceTest getEnvironmentSetUp\n";
-        $translationDriver = env('TRANSLATION_DRIVER', 'aliyun');
-        $accessKeyId = env('ALIYUN_TRANSLATION_ACCESS_KEY_ID', '');
-        $accessSecret = env('ALIYUN_TRANSLATION_ACCESS_KEY_SECRET', '');
-        $regionId = env('ALIYUN_TRANSLATION_REGION_ID', 'cn-hongkong');
+        $translationDriver = $_ENV['TRANSLATION_DRIVER'] ?? 'aliyun';
+        $accessKeyId = $_ENV['ALIYUN_TRANSLATION_ACCESS_KEY_ID'] ?? '';
+        $accessSecret = $_ENV['ALIYUN_TRANSLATION_ACCESS_KEY_SECRET'] ?? '';
+        $regionId = $_ENV['ALIYUN_TRANSLATION_REGION_ID'] ?? 'cn-hongkong';
+
 
         echo "translationDriver: $translationDriver\n";
         echo "accessKeyId: $accessKeyId\n";
