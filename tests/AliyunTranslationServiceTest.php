@@ -15,18 +15,12 @@ class AliyunTranslationServiceTest extends TestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        echo "AliyunTranslationServiceTest getEnvironmentSetUp\n";
         $translationDriver = env('TRANSLATION_DRIVER', 'aliyun');
         $accessKeyId = env('ALIYUN_TRANSLATION_ACCESS_KEY_ID', '');
         $accessSecret = env('ALIYUN_TRANSLATION_ACCESS_KEY_SECRET', '');
         $regionId = env('ALIYUN_TRANSLATION_REGION_ID', 'cn-hongkong');
 
-        echo "translationDriver: $translationDriver\n";
-        echo "accessKeyId: $accessKeyId\n";
-        echo "accessSecret: $accessSecret\n";
-        echo "regionId: $regionId\n";
-
-        Config::set("Translation.default",$translationDriver);
+        Config::set("Translation.default", $translationDriver);
         Config::set('Translation.channels.aliyun.accessKeyId', $accessKeyId);
         Config::set('Translation.channels.aliyun.accessSecret', $accessSecret);
         Config::set('Translation.channels.aliyun.regionId', $regionId);
@@ -34,11 +28,25 @@ class AliyunTranslationServiceTest extends TestCase
 
     public function testServiceCanBeResolvedFromContainer()
     {
-        $this->getEnvironmentSetUp($this->app);
-        echo "AliyunTranslationServiceTest testServiceCanBeResolvedFromContainer\n";
         if (!empty($this)) {
             $service = $this->app->make(TranslationService::class);
         }
         $this->assertInstanceOf(TranslationService::class, $service);
+    }
+
+    public function testAliyunTranslationService()
+    {
+        Config::set("Translation.default", 'aliyun');
+        $service = $this->app->make(TranslationService::class);
+        $result = $service->translate('hello world', 'en', 'zh');
+        $this->assertEquals('你好，世界', $result);
+    }
+
+    public function testGoogleTranslationService()
+    {
+        Config::set("Translation.default", 'google');
+        $service = $this->app->make(TranslationService::class);
+        $result = $service->translate('hello world', 'en', 'zh');
+        $this->assertEquals('你好，世界', $result);
     }
 }
