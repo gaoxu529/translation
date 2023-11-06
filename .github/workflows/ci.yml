@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    environment: TranslationProvider
+    environment: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -27,11 +27,10 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
 
-      - name: Set up environment variables
-        run: |
-          echo "ALIYUN_TRANSLATION_ACCESS_KEY_ID=${{secrets.ALIYUN_TRANSLATION_ACCESS_KEY_ID }}" >> $GITHUB_ENV
-          echo "ALIYUN_TRANSLATION_ACCESS_KEY_SECRET=${{secrets.ALIYUN_TRANSLATION_ACCESS_KEY_SECRET }}" >> $GITHUB_ENV
-          echo "ALIYUN_TRANSLATION_REGION_ID=${{secrets.ALIYUN_TRANSLATION_REGION_ID }}" >> $GITHUB_ENV
-
       - name: Run tests
         run: vendor/bin/phpunit
+        env:
+          TRANSLATION_DRIVER: 'aliyun' # 选择你希望测试的翻译驱动
+          ALIYUN_TRANSLATION_ACCESS_KEY_ID: ${{secrets.ALIYUN_TRANSLATION_ACCESS_KEY_ID }}
+          ALIYUN_TRANSLATION_ACCESS_KEY_SECRET: ${{secrets.ALIYUN_TRANSLATION_ACCESS_KEY_SECRET }}
+          ALIYUN_TRANSLATION_REGION_ID: ${{variables.ALIYUN_TRANSLATION_REGION_ID }}
