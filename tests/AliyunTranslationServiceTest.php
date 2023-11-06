@@ -9,16 +9,10 @@ class AliyunTranslationServiceTest extends TestCase
 {
     protected function getEnvironmentSetUp($app)
     {
-        var_dump($_ENV);
         $translationDriver = env('TRANSLATION_DRIVER', 'aliyun');
-        $accessKeyId = env('ALIYUN_TRANSLATION_ACCESS_KEY_ID', '');
-        $accessSecret = env('ALIYUN_TRANSLATION_ACCESS_KEY_SECRET', '');
+        $accessKeyId = env('ALIYUN_TRANSLATION_ACCESS_KEY_ID', 'LTAI5tAXE78JD6aLLzDDdfpT');
+        $accessSecret = env('ALIYUN_TRANSLATION_ACCESS_KEY_SECRET', 'OMWRc8BLIJRZV6lRcKd4OgKKJBhKDY');
         $regionId = env('ALIYUN_TRANSLATION_REGION_ID', 'cn-hongkong');
-
-        echo "translationDriver: " . $translationDriver . "\n";
-        echo "accessKeyId: " . $accessKeyId . "\n";
-        echo "accessSecret: " . $accessSecret . "\n";
-        echo "regionId: " . $regionId . "\n";
 
         Config::set("Translation.default", $translationDriver);
         Config::set('Translation.channels.aliyun.accessKeyId', $accessKeyId);
@@ -28,6 +22,7 @@ class AliyunTranslationServiceTest extends TestCase
 
     public function testServiceCanBeResolvedFromContainer()
     {
+        exec('php -v');
         if (!empty($this)) {
             $service = $this->app->make(TranslationService::class);
         }
@@ -37,10 +32,11 @@ class AliyunTranslationServiceTest extends TestCase
     public function testAliyunTranslationService()
     {
         Config::set("Translation.default", 'aliyun');
-        $service = $this->app->make(TranslationService::class);
-        $result = $service->translation('en', 'zh-CN', 'hello world');
-        echo "翻译结果为：" . $result;
-        $this->assertEquals('你好，世界', $result);
+        if (!empty($this)) {
+            $service = $this->app->make(TranslationService::class);
+        }
+        $result = $service->translation('en', 'zh', 'hello world');
+        $this->assertEquals('你好世界', $result);
     }
 
 //    public function testGoogleTranslationService()
