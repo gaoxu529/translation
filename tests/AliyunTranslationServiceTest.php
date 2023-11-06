@@ -38,8 +38,8 @@ class AliyunTranslationServiceTest extends TestCase
     {
         Config::set("Translation.default", 'aliyun');
         $service = $this->app->make(TranslationService::class);
-        $result = $service->translation('hello world', 'en', 'zh');
-        echo "翻译结果为：".$result;
+        $result = $service->translation('en', 'zh', 'hello world');
+        echo "翻译结果为：" . $result;
         $this->assertEquals('你好，世界', $result);
     }
 
